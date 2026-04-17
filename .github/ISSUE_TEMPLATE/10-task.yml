@@ -1,0 +1,53 @@
+name: Task
+description: Deliver a concrete increment aligned with the Goal Stack
+title: "Task: {{PLACEHOLDER_TITLE}}"
+labels: ["type:task"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What is the deliverable and why does it matter (tie to Goal Stack)?
+      placeholder: "{{PLACEHOLDER}}"
+    validations:
+      required: true
+  - type: textarea
+    id: dod
+    attributes:
+      label: Acceptance criteria (DoD for this task)
+      description: Measurable checks that define completion.
+      placeholder: "- [ ] ..."
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints / invariants to respect
+      description: Reference `PROJECT_OVERVIEW.md`.
+      placeholder: "{{PLACEHOLDER}}"
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification plan
+      description: Tests, checks, validation steps.
+      placeholder: "{{PLACEHOLDER}}"
+    validations:
+      required: true
+  - type: dropdown
+    id: decision_gate
+    attributes:
+      label: Does this cross a Decision Gate?
+      options:
+        - "No"
+        - "Yes (explain below)"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / context
+      placeholder: "{{PLACEHOLDER}}"
+    validations:
+      required: false

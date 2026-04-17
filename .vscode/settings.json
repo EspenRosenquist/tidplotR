@@ -1,0 +1,6 @@
+{
+  // Enable Copilot instruction files in VS Code.  See AI_INSTRUCTIONS.md for details.
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  // Path to the repository‑wide instruction file used by Copilot.  This must be relative to the repo root.
+  "github.copilot.instructions.file": ".github/copilot-instructions.md"
+}

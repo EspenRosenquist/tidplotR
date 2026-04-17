@@ -1,0 +1,30 @@
+# Ignore potentially sensitive environment variables
+.env
+
+# Ignore build artifacts and temporary files
+artifacts/
+tmp/
+
+# Ignore R session history and workspace
+.Rhistory
+.RData
+.Ruserdata
+
+# Ignore RStudio project files
+.Rproj.user/
+*.Rproj
+
+# Ignore compiled vignettes and temporary build files
+inst/doc/
+doc/
+Meta/
+.Rcheck/
+
+# Ignore OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Ignore package tarballs and compiled shared objects
+*.tar.gz
+*.so
+*.dll

@@ -1,0 +1,83 @@
+---
+title: "tidplotR Overview"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidplotR Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+`tidplotR` is a small shared package for generic time-oriented plots and
+deterministic SVG export.
+
+The boundary is deliberate:
+
+- `tidplotR` renders plot-ready inputs
+- `tidflowR` and other packages can prepare or aggregate those inputs upstream
+
+## Monthly coverage example
+
+```{r}
+library(tidplotR)
+
+coverage_df <- data.frame(
+  month = as.Date(c("2024-01-01", "2024-02-01", "2024-03-01")),
+  employee_count = c(12L, 15L, 14L)
+)
+
+plot_monthly_measurement_coverage(coverage_df)
+```
+
+## Value distribution example
+
+```{r}
+indicator_def <- list(
+  id = "def01",
+  x_breaks = c(1, 2, 3, 4),
+  x_labels = c("1", "2", "3", "4"),
+  x_vertical_lines = c(2, 3),
+  xlab = "Example bins"
+)
+
+risk_categories <- data.frame(
+  riskLevel = 1:4,
+  label = c("low", "medium", "high", "critical"),
+  colour = c("#53A63A", "#F9E49D", "#E88D21", "#AF2F2C"),
+  stringsAsFactors = FALSE
+)
+
+palette <- stats::setNames(risk_categories$colour, risk_categories$label)
+
+value_df <- data.frame(
+  indicator_id = rep("def01", 4),
+  value = 1:4,
+  riskLevel = 1:4,
+  andel_n = c(0.42, 0.28, 0.19, 0.11),
+  stringsAsFactors = FALSE
+)
+
+plot_value_distribution(
+  value_df,
+  indicator_def = indicator_def,
+  risk_categories = risk_categories,
+  palette = palette
+)
+```
+
+## SVG export
+
+```{r}
+path <- tempfile(fileext = ".svg")
+plot <- plot_monthly_measurement_coverage(coverage_df)
+
+write_svg(plot, path, width_mm = 120, height_mm = 70)
+file.exists(path)
+unlink(path)
+```

@@ -1,0 +1,28 @@
+Package: tidplotR
+Type: Package
+Title: Shared Time-Oriented Plot and SVG Toolkit
+Version: 0.0.1
+Authors@R: c(person("Espen", "Rosenquist", email = "espen.rosenquist@stami.no", role = c("aut", "cre")))
+Description: Shared plotting infrastructure for time-oriented report and
+    analysis packages, with reusable ggplot builders and deterministic SVG
+    export that can be used standalone or alongside tidflowR and related R
+    data products.
+License: Apache License (== 2.0)
+Encoding: UTF-8
+LazyData: false
+Depends:
+    R (>= 4.2.0)
+Imports:
+    ggplot2,
+    scales,
+    svglite
+Suggests:
+    knitr,
+    pkgload,
+    roxygen2,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3

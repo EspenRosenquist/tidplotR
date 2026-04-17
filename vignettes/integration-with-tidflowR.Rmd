@@ -1,0 +1,59 @@
+---
+title: "Integration with tidflowR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Integration with tidflowR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+`tidplotR` is designed to pair naturally with `tidflowR` without requiring it.
+
+The intended tandem workflow is:
+
+1. `tidflowR` loads, validates, fetches, or aggregates data.
+2. `tidplotR` turns the resulting data frames into reusable plots and SVG files.
+
+## Example shape compatible with a tidflowR-style risk distribution
+
+```{r}
+library(tidplotR)
+
+risk_categories <- data.frame(
+  riskLevel = 1:4,
+  label = c("low", "medium", "high", "critical"),
+  colour = c("#53A63A", "#F9E49D", "#E88D21", "#AF2F2C"),
+  stringsAsFactors = FALSE
+)
+
+palette <- stats::setNames(risk_categories$colour, risk_categories$label)
+
+risk_df <- data.frame(
+  indicator_id = rep("def01", 8),
+  entity = rep(c("bedriften", "alle"), each = 4),
+  riskLevel = rep(1:4, 2),
+  andel_n = c(0.35, 0.33, 0.20, 0.12, 0.46, 0.24, 0.18, 0.12),
+  stringsAsFactors = FALSE
+)
+
+plot_risk_comparison(
+  risk_df,
+  risk_categories = risk_categories,
+  palette = palette
+)
+```
+
+## Boundary guidance
+
+- Keep data shaping and connector logic upstream in `tidflowR` or downstream
+  consumer packages.
+- Keep SVG writing and reusable plot builders here in `tidplotR`.
+- Avoid introducing a hard package dependency in either direction unless the
+  boundary is revisited explicitly.
