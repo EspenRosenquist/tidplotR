@@ -10,7 +10,7 @@ plot_monthly_measurement_coverage(
   line_colour = "#51BAE8",
   point_colour = "#51BAE8",
   y_lab = "Ansatte med malinger",
-  base_family = "Fira Sans",
+  base_family = NULL,
   base_size = 9
 )
 }
@@ -25,7 +25,8 @@ plot_monthly_measurement_coverage(
 
 \item{y_lab}{Y-axis label.}
 
-\item{base_family}{Font family for plot text.}
+\item{base_family}{Optional font family for plot text. When \code{NULL}, uses the
+default \code{NOArtisan} family if that package is loaded, otherwise \code{"sans"}.}
 
 \item{base_size}{Base font size for the plot theme.}
 }

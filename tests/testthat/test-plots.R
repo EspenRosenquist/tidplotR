@@ -33,13 +33,13 @@ test_that("value and risk plots build from standalone aggregated inputs", {
     value_dist_df = value_df,
     indicator_def = indicator_def,
     risk_categories = risk_categories,
-    palette = palette,
+    palette = NULL,
     margin_mm = c(0, 0, 1, 0)
   )
   risk_plot <- plot_risk_comparison(
     risk_dist_df = risk_df,
     risk_categories = risk_categories,
-    palette = palette
+    palette = NULL
   )
 
   expect_s3_class(value_plot, "ggplot")
@@ -81,8 +81,8 @@ test_that("context distribution and weekly heatmap plots build from synthetic we
 
   palette <- c(low = "#4caf50", medium = "#ffb300", high = "#e53935")
 
-  context_plot <- plot_context_risk_distribution(dist_df, palette = palette, title = "IND01")
-  heatmap_plot <- plot_weekly_risk_heatmap(weekly_df, palette = palette, title = "IND01 weekly risk")
+  context_plot <- plot_context_risk_distribution(dist_df, palette = NULL, title = "IND01")
+  heatmap_plot <- plot_weekly_risk_heatmap(weekly_df, palette = NULL, title = "IND01 weekly risk")
 
   expect_s3_class(context_plot, "ggplot")
   expect_s3_class(heatmap_plot, "ggplot")

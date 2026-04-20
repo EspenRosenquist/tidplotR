@@ -12,6 +12,18 @@
 
 NULL
 
+utils::globalVariables(c(
+  "andel_n",
+  "context",
+  "employee_count",
+  "entity",
+  "pct",
+  "risk",
+  "risk_level",
+  "value",
+  "week"
+))
+
 #' Null-coalescing infix helper
 #'
 #' Returns the right-hand side when the left-hand side is `NULL` or empty.
@@ -19,6 +31,7 @@ NULL
 #' @param x Value to test.
 #' @param y Fallback value.
 #' @return `x` when non-null/non-empty, otherwise `y`.
+#' @noRd
 #' @keywords internal
 `%||%` <- function(x, y) {
   if (is.null(x) || length(x) == 0) y else x

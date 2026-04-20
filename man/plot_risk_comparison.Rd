@@ -7,9 +7,9 @@
 plot_risk_comparison(
   risk_dist_df,
   risk_categories,
-  palette,
+  palette = NULL,
   entity_levels = c("bedriften", "alle"),
-  base_family = "Fira Sans",
+  base_family = NULL,
   base_size = 9,
   margin_mm = NULL
 )
@@ -19,11 +19,12 @@ plot_risk_comparison(
 
 \item{risk_categories}{Data frame with \code{riskLevel} and \code{label}.}
 
-\item{palette}{Named color vector keyed by risk label.}
+\item{palette}{Optional named color vector keyed by risk label.}
 
 \item{entity_levels}{Ordered entity labels.}
 
-\item{base_family}{Font family for plot text.}
+\item{base_family}{Optional font family for plot text. When \code{NULL}, uses the
+default \code{NOArtisan} family if that package is loaded, otherwise \code{"sans"}.}
 
 \item{base_size}{Base font size for the plot theme.}
 

@@ -23,8 +23,28 @@ install.packages("pak")
 pak::local_install(".")
 ```
 
-If you use the VS Code devcontainer in this repo, the required system
-dependencies for `svglite` are installed automatically.
+If you develop on Linux, make sure the required host-side system dependencies
+for `svglite` are installed.
+
+## Fonts
+
+`tidplotR` keeps its plot defaults on the host-safe `sans` family so examples,
+tests, and checks do not depend on local font installation. If you use
+`NOArtisan`, prefer its branded font installer:
+
+```r
+NOArtisan::install_STAMI_fonts()
+```
+
+After installing the fonts you can opt into the family explicitly:
+
+```r
+plot <- plot_monthly_measurement_coverage(coverage_df, base_family = "Fira Sans")
+```
+
+If `NOArtisan` is loaded in the session, `tidplotR` will also use the STAMI
+theme defaults and Norwegian percentage labelling automatically while still
+remaining usable without that package.
 
 ## Start Using tidplotR
 
@@ -80,12 +100,18 @@ Use the package vignettes for the fuller workflows:
 
 ## Development
 
-For package development inside this repo, the common commands are:
+For package development inside this repo, open `tidplotR.Rproj` in RStudio or
+keep the repo root as the working directory in VS Code. That matches the
+standard package workflow: use `pkgload::load_all()`, run tests often, and
+check the package early.
+
+The common commands are:
 
 ```sh
 make document
 make test
 make smoke
+make check
 ```
 
 Useful one-off commands:

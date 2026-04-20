@@ -6,9 +6,9 @@
 \usage{
 plot_weekly_risk_heatmap(
   weekly_df,
-  palette,
+  palette = NULL,
   context_levels = c("company", "baseline"),
-  base_family = "Helvetica",
+  base_family = NULL,
   base_size = 8,
   title = NULL,
   x_lab = "Week",
@@ -18,11 +18,12 @@ plot_weekly_risk_heatmap(
 \arguments{
 \item{weekly_df}{Weekly risk data with \code{week}, \code{context}, and \code{risk_level}.}
 
-\item{palette}{Named color vector keyed by risk level labels.}
+\item{palette}{Optional named color vector keyed by risk level labels.}
 
 \item{context_levels}{Ordered context labels.}
 
-\item{base_family}{Font family for plot text.}
+\item{base_family}{Optional font family for plot text. When \code{NULL}, uses the
+default \code{NOArtisan} family if that package is loaded, otherwise \code{"sans"}.}
 
 \item{base_size}{Base font size for the plot theme.}
 

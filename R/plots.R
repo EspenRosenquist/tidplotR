@@ -64,8 +64,9 @@ validate_dimension_mm <- function(value, arg) {
 #'   and `riskLevel` columns.
 #' @param indicator_def Indicator definition list.
 #' @param risk_categories Data frame with `riskLevel` and `label`.
-#' @param palette Named color vector keyed by risk label.
-#' @param base_family Font family for plot text.
+#' @param palette Optional named color vector keyed by risk label.
+#' @param base_family Optional font family for plot text. When `NULL`, uses the
+#'   default `NOArtisan` family if that package is loaded, otherwise `"sans"`.
 #' @param base_size Base font size for the plot theme.
 #' @param margin_mm Optional numeric vector of plot margins in millimeters:
 #'   `c(top, right, bottom, left)`.
@@ -103,8 +104,8 @@ validate_dimension_mm <- function(value, arg) {
 plot_value_distribution <- function(value_dist_df,
                                     indicator_def,
                                     risk_categories,
-                                    palette,
-                                    base_family = "Fira Sans",
+                                    palette = NULL,
+                                    base_family = NULL,
                                     base_size = 9,
                                     margin_mm = NULL) {
   if (!nrow(value_dist_df)) {
@@ -112,7 +113,11 @@ plot_value_distribution <- function(value_dist_df,
   }
 
   risk_categories <- normalize_risk_categories(risk_categories)
-  validate_named_palette(palette)
+  fallback_palette <- NULL
+  if ("colour" %in% names(risk_categories)) {
+    fallback_palette <- stats::setNames(risk_categories$colour, risk_categories$label)
+  }
+  palette <- resolve_palette(risk_categories$label, palette = palette, fallback = fallback_palette)
 
   risk_map <- stats::setNames(risk_categories$label, as.character(risk_categories$riskLevel))
   df <- value_dist_df
@@ -136,12 +141,12 @@ plot_value_distribution <- function(value_dist_df,
       expand = ggplot2::expansion(mult = c(0, 0))
     ) +
     ggplot2::scale_y_continuous(
-      labels = scales::percent_format(accuracy = 1, decimal.mark = ",", suffix = " %"),
+      labels = proportion_labeler(),
       expand = ggplot2::expansion(mult = c(0, 0.06))
     ) +
     ggplot2::scale_fill_manual(values = palette, drop = FALSE, guide = "none") +
     ggplot2::labs(x = indicator_def$xlab %||% NULL, y = NULL) +
-    ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
+    default_plot_theme(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_blank(),
       panel.grid.minor.x = ggplot2::element_blank()
@@ -168,9 +173,10 @@ plot_value_distribution <- function(value_dist_df,
 #'
 #' @param risk_dist_df Aggregated risk distribution.
 #' @param risk_categories Data frame with `riskLevel` and `label`.
-#' @param palette Named color vector keyed by risk label.
+#' @param palette Optional named color vector keyed by risk label.
 #' @param entity_levels Ordered entity labels.
-#' @param base_family Font family for plot text.
+#' @param base_family Optional font family for plot text. When `NULL`, uses the
+#'   default `NOArtisan` family if that package is loaded, otherwise `"sans"`.
 #' @param base_size Base font size for the plot theme.
 #' @param margin_mm Optional numeric vector of plot margins in millimeters:
 #'   `c(top, right, bottom, left)`.
@@ -199,9 +205,9 @@ plot_value_distribution <- function(value_dist_df,
 #' @export
 plot_risk_comparison <- function(risk_dist_df,
                                  risk_categories,
-                                 palette,
+                                 palette = NULL,
                                  entity_levels = c("bedriften", "alle"),
-                                 base_family = "Fira Sans",
+                                 base_family = NULL,
                                  base_size = 9,
                                  margin_mm = NULL) {
   if (!nrow(risk_dist_df)) {
@@ -209,7 +215,11 @@ plot_risk_comparison <- function(risk_dist_df,
   }
 
   risk_categories <- normalize_risk_categories(risk_categories)
-  validate_named_palette(palette)
+  fallback_palette <- NULL
+  if ("colour" %in% names(risk_categories)) {
+    fallback_palette <- stats::setNames(risk_categories$colour, risk_categories$label)
+  }
+  palette <- resolve_palette(risk_categories$label, palette = palette, fallback = fallback_palette)
 
   risk_map <- stats::setNames(risk_categories$label, as.character(risk_categories$riskLevel))
   df <- risk_dist_df
@@ -221,12 +231,12 @@ plot_risk_comparison <- function(risk_dist_df,
     ggplot2::geom_col(position = "stack", width = 0.6) +
     ggplot2::scale_fill_manual(values = palette, drop = FALSE, guide = "none") +
     ggplot2::scale_x_continuous(
-      labels = scales::percent_format(accuracy = 1, decimal.mark = ",", suffix = " %"),
+      labels = proportion_labeler(),
       limits = c(0, 1.1),
       expand = ggplot2::expansion(mult = c(0, 0))
     ) +
     ggplot2::labs(x = NULL, y = NULL) +
-    ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
+    default_plot_theme(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_blank(),
       panel.grid.major.y = ggplot2::element_blank()
@@ -244,9 +254,10 @@ plot_risk_comparison <- function(risk_dist_df,
 #'
 #' @param dist_df Aggregated context/risk distribution with `context`, `pct`,
 #'   and `risk_level`.
-#' @param palette Named color vector keyed by risk level labels.
+#' @param palette Optional named color vector keyed by risk level labels.
 #' @param context_levels Ordered context labels.
-#' @param base_family Font family for plot text.
+#' @param base_family Optional font family for plot text. When `NULL`, uses the
+#'   default `NOArtisan` family if that package is loaded, otherwise `"sans"`.
 #' @param base_size Base font size for the plot theme.
 #' @param title Optional plot title.
 #' @param y_lab Y-axis label.
@@ -264,9 +275,9 @@ plot_risk_comparison <- function(risk_dist_df,
 #' plot_context_risk_distribution(dist_df, palette = palette, title = "IND01")
 #' @export
 plot_context_risk_distribution <- function(dist_df,
-                                           palette,
+                                           palette = NULL,
                                            context_levels = c("company", "baseline"),
-                                           base_family = "Helvetica",
+                                           base_family = NULL,
                                            base_size = 9,
                                            title = NULL,
                                            y_lab = "Percent of weeks",
@@ -275,12 +286,12 @@ plot_context_risk_distribution <- function(dist_df,
     return(NULL)
   }
 
-  validate_named_palette(palette)
-
   required <- c("context", "pct", "risk_level")
   if (!all(required %in% names(dist_df))) {
     stop("dist_df must include context, pct, and risk_level")
   }
+
+  palette <- resolve_palette(unique(as.character(dist_df$risk_level)), palette = palette)
 
   df <- dist_df
   df$context <- factor(as.character(df$context), levels = context_levels, ordered = TRUE)
@@ -290,20 +301,21 @@ plot_context_risk_distribution <- function(dist_df,
     ggplot2::geom_col(width = 0.6) +
     ggplot2::scale_fill_manual(values = palette, drop = FALSE) +
     ggplot2::scale_y_continuous(
-      labels = scales::label_number(accuracy = 1, decimal.mark = ",", suffix = " %"),
+      labels = percent_number_labeler(),
       expand = ggplot2::expansion(mult = c(0, 0.05))
     ) +
     ggplot2::labs(title = title, x = NULL, y = y_lab) +
-    ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
+    default_plot_theme(base_size = base_size, base_family = base_family) +
     ggplot2::theme(legend.position = legend_position)
 }
 
 #' Plot weekly risk levels as a heatmap
 #'
 #' @param weekly_df Weekly risk data with `week`, `context`, and `risk_level`.
-#' @param palette Named color vector keyed by risk level labels.
+#' @param palette Optional named color vector keyed by risk level labels.
 #' @param context_levels Ordered context labels.
-#' @param base_family Font family for plot text.
+#' @param base_family Optional font family for plot text. When `NULL`, uses the
+#'   default `NOArtisan` family if that package is loaded, otherwise `"sans"`.
 #' @param base_size Base font size for the plot theme.
 #' @param title Optional plot title.
 #' @param x_lab X-axis label.
@@ -322,9 +334,9 @@ plot_context_risk_distribution <- function(dist_df,
 #' plot_weekly_risk_heatmap(weekly_df, palette = palette, title = "IND01 weekly risk")
 #' @export
 plot_weekly_risk_heatmap <- function(weekly_df,
-                                     palette,
+                                     palette = NULL,
                                      context_levels = c("company", "baseline"),
-                                     base_family = "Helvetica",
+                                     base_family = NULL,
                                      base_size = 8,
                                      title = NULL,
                                      x_lab = "Week",
@@ -333,12 +345,12 @@ plot_weekly_risk_heatmap <- function(weekly_df,
     return(NULL)
   }
 
-  validate_named_palette(palette)
-
   required <- c("week", "context", "risk_level")
   if (!all(required %in% names(weekly_df))) {
     stop("weekly_df must include week, context, and risk_level")
   }
+
+  palette <- resolve_palette(unique(as.character(weekly_df$risk_level)), palette = palette)
 
   df <- weekly_df
   df$context <- factor(as.character(df$context), levels = context_levels, ordered = TRUE)
@@ -348,7 +360,7 @@ plot_weekly_risk_heatmap <- function(weekly_df,
     ggplot2::geom_tile(color = tile_colour) +
     ggplot2::scale_fill_manual(values = palette, drop = FALSE, guide = "none") +
     ggplot2::labs(title = title, x = x_lab, y = NULL) +
-    ggplot2::theme_minimal(base_size = base_size, base_family = base_family)
+    default_plot_theme(base_size = base_size, base_family = base_family)
 }
 
 #' Plot monthly employee measurement coverage
@@ -358,7 +370,8 @@ plot_weekly_risk_heatmap <- function(weekly_df,
 #' @param line_colour Line color for the overlay.
 #' @param point_colour Point color for the overlay.
 #' @param y_lab Y-axis label.
-#' @param base_family Font family for plot text.
+#' @param base_family Optional font family for plot text. When `NULL`, uses the
+#'   default `NOArtisan` family if that package is loaded, otherwise `"sans"`.
 #' @param base_size Base font size for the plot theme.
 #' @return A `ggplot` object or `NULL` when no data.
 #' @seealso [ggplot2::ggplot()].
@@ -374,7 +387,7 @@ plot_monthly_measurement_coverage <- function(df,
                                               line_colour = "#51BAE8",
                                               point_colour = "#51BAE8",
                                               y_lab = "Ansatte med malinger",
-                                              base_family = "Fira Sans",
+                                              base_family = NULL,
                                               base_size = 9) {
   if (!nrow(df)) {
     return(NULL)
@@ -402,7 +415,7 @@ plot_monthly_measurement_coverage <- function(df,
     ggplot2::geom_line(linewidth = 0.5, colour = line_colour) +
     ggplot2::geom_point(size = 1.8, colour = point_colour) +
     ggplot2::labs(x = NULL, y = y_lab) +
-    ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
+    default_plot_theme(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),

@@ -14,7 +14,7 @@ this package.
 
 ## Definition of Done (DoD)
 
-- A local repository exists under `/workspaces/tidplotR` with package metadata,
+- A local repository exists under `/home/esro/analytid-platform/tidplotR` with package metadata,
   control-plane documents, tests, vignettes, and a reusable code structure.
 - The public surface of `tidplotR` is documented clearly enough that a follow-up
   session can continue without re-discovery.
@@ -34,7 +34,7 @@ this package.
     convenience helpers.
 - **Platform / Runtime**
   - Must run on Linux.
-  - Must support local development from `/workspaces/tidplotR`.
+  - Must support local development from `/home/esro/analytid-platform/tidplotR`.
   - Must work with ordinary R package workflows such as `pkgload::load_all()`
     and `R CMD check`.
 - **Tooling**

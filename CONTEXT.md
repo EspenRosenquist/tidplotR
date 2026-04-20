@@ -39,7 +39,7 @@ turns already-shaped data into plots and SVG assets.
 Standalone use:
 
 - analysts or packages can hand `tidplotR` plain data frames and render plots
-	directly without bringing in `tidflowR`
+  directly without bringing in `tidflowR`
 
 Tandem use with `tidflowR`:
 
@@ -54,19 +54,19 @@ enough that the package can be used as a plotting toolbox on its own.
 
 ## Known Limitations At Scaffold Time
 
-- The local repository exists under `/workspaces/tidplotR`, but the target
-	GitHub repo does not exist yet.
+- The local repository exists under `/home/esro/analytid-platform/tidplotR`, but the target
+  GitHub repo does not exist yet.
 - Generic plotting code has been scaffolded locally here, but `tidflowR` still
-	retains its current plotting layer until the migration is completed.
+  retains its current plotting layer until the migration is completed.
 - No downstream consumer package has been repointed to `tidplotR` yet.
 - Local documentation, tests, and smoke checks now pass, but downstream
-	consumer migration remains open.
+  consumer migration remains open.
 
 ## Next Session Starting Points
 
 1. Move generic plot entrypoints in `tidflowR` and downstream consumers over to
-	 `tidplotR`.
+   `tidplotR`.
 2. Decide whether any compatibility wrappers should temporarily remain in
-	 `tidflowR` during migration.
+   `tidflowR` during migration.
 3. Create the GitHub repository and push the local scaffold once the remote is
-	 available.
+   available.

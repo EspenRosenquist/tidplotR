@@ -6,9 +6,9 @@
 \usage{
 plot_context_risk_distribution(
   dist_df,
-  palette,
+  palette = NULL,
   context_levels = c("company", "baseline"),
-  base_family = "Helvetica",
+  base_family = NULL,
   base_size = 9,
   title = NULL,
   y_lab = "Percent of weeks",
@@ -19,11 +19,12 @@ plot_context_risk_distribution(
 \item{dist_df}{Aggregated context/risk distribution with \code{context}, \code{pct},
 and \code{risk_level}.}
 
-\item{palette}{Named color vector keyed by risk level labels.}
+\item{palette}{Optional named color vector keyed by risk level labels.}
 
 \item{context_levels}{Ordered context labels.}
 
-\item{base_family}{Font family for plot text.}
+\item{base_family}{Optional font family for plot text. When \code{NULL}, uses the
+default \code{NOArtisan} family if that package is loaded, otherwise \code{"sans"}.}
 
 \item{base_size}{Base font size for the plot theme.}
 

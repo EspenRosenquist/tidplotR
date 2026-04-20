@@ -10,15 +10,17 @@ tmp/
 .RData
 .Ruserdata
 
-# Ignore RStudio project files
+# Ignore RStudio project user files but keep the package project tracked
 .Rproj.user/
 *.Rproj
+!tidplotR.Rproj
 
 # Ignore compiled vignettes and temporary build files
 inst/doc/
 doc/
 Meta/
 .Rcheck/
+*.Rcheck/
 
 # Ignore OS-specific junk
 .DS_Store

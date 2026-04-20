@@ -8,7 +8,7 @@ ordered, and current.
 1. Finalize the first-wave `tidplotR` public API and package boundary.
 2. Keep `tidplotR` usable both standalone and in tandem with `tidflowR`.
 3. Migrate generic plotting and SVG export responsibilities out of `tidflowR`
-	 and into `tidplotR`.
+   and into `tidplotR`.
 4. Keep the dependency surface shallow while preserving deterministic SVG output.
 5. Document downstream migration guidance for current report packages.
 6. Create and connect the intended GitHub remote once the repository exists.
@@ -22,7 +22,7 @@ Review cadence: session-by-session while extraction is active
 - [x] Capture the current domain and package boundary in `CONTEXT.md`.
 - [x] Record the starting decisions in `DECISIONS.md`.
 - [x] Create the first execution plan under `plans/`.
-- [x] Scaffold the local R package structure, tests, and devcontainer.
+- [x] Scaffold the local R package structure, tests, and host-native project setup.
 - [x] Run `make document`.
 - [x] Run `make test`.
 - [x] Run `make smoke`.
@@ -32,14 +32,14 @@ Review cadence: session-by-session while extraction is active
 ## Backlog (prioritised)
 
 - P0: Complete the migration boundary with `tidflowR` so generic plot helpers
-	and SVG writing no longer need to live in the data-flow package.
+  and SVG writing no longer need to live in the data-flow package.
 - P0: Verify that `tidplotR` can be used directly on plain data frames without
-	any `tidflowR` dependency.
+  any `tidflowR` dependency.
 - P0: Publish the target GitHub repository and connect the local repo cleanly.
 - P1: Decide whether temporary compatibility wrappers should remain in
-	`tidflowR` during downstream migration.
+  `tidflowR` during downstream migration.
 - P1: Add one or two more reusable plot patterns only if they are clearly
-	generic across multiple consumers.
+  generic across multiple consumers.
 - P1: Repoint `modeltemplateR` and `atidmodelR` to `tidplotR` for generic plots.
 - P2: Add a migration vignette focused on downstream package adoption.
 - P2: Revisit namespace ergonomics and naming once two consumers are migrated.

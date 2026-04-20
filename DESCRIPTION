@@ -3,6 +3,8 @@ Type: Package
 Title: Shared Time-Oriented Plot and SVG Toolkit
 Version: 0.0.1
 Authors@R: c(person("Espen", "Rosenquist", email = "espen.rosenquist@stami.no", role = c("aut", "cre")))
+Author: Espen Rosenquist [aut, cre]
+Maintainer: Espen Rosenquist <espen.rosenquist@stami.no>
 Description: Shared plotting infrastructure for time-oriented report and
     analysis packages, with reusable ggplot builders and deterministic SVG
     export that can be used standalone or alongside tidflowR and related R
@@ -18,6 +20,7 @@ Imports:
     svglite
 Suggests:
     knitr,
+    NOArtisan,
     pkgload,
     roxygen2,
     rmarkdown,

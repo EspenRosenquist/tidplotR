@@ -8,8 +8,8 @@ plot_value_distribution(
   value_dist_df,
   indicator_def,
   risk_categories,
-  palette,
-  base_family = "Fira Sans",
+  palette = NULL,
+  base_family = NULL,
   base_size = 9,
   margin_mm = NULL
 )
@@ -22,9 +22,10 @@ and \code{riskLevel} columns.}
 
 \item{risk_categories}{Data frame with \code{riskLevel} and \code{label}.}
 
-\item{palette}{Named color vector keyed by risk label.}
+\item{palette}{Optional named color vector keyed by risk label.}
 
-\item{base_family}{Font family for plot text.}
+\item{base_family}{Optional font family for plot text. When \code{NULL}, uses the
+default \code{NOArtisan} family if that package is loaded, otherwise \code{"sans"}.}
 
 \item{base_size}{Base font size for the plot theme.}
 

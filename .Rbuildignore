@@ -1,0 +1,9 @@
+^\.Rproj\.user$
+^.*\.Rproj$
+^\.agent$
+^\.editorconfig$
+^\.github$
+^\.vscode$
+^\.DS_Store$
+^LICENSE$
+^tmp$

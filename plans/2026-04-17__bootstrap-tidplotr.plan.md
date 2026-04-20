@@ -8,9 +8,9 @@
 
 ## 1) Objective
 
-- Establish a sibling shared package repository under `/workspaces/tidplotR`.
+- Establish a sibling shared package repository under `/home/esro/analytid-platform/tidplotR`.
 - Separate generic plotting and deterministic SVG export from `tidflowR`.
-- Reuse the same control-plane, package, test, and devcontainer scaffold that
+- Reuse the same control-plane, package, and test scaffold that
   already works in `tidflowR`.
 - **Done when:** the repository can be opened on its own and the next session
   can continue the migration without re-discovery.
@@ -47,8 +47,8 @@ dependencies so `tidplotR` owns only plot building and SVG export.
 
 ## 5) Execution steps
 
-- [x] Clone the cognitive-template repo into `/workspaces/tidplotR`.
-- [x] Copy the current `tidflowR` scaffold structure and devcontainer as the baseline.
+- [x] Clone the cognitive-template repo into `/home/esro/analytid-platform/tidplotR`.
+- [x] Copy the current `tidflowR` scaffold structure as the baseline.
 - [x] Replace the package metadata and code with a plot-focused `tidplotR` surface.
 - [x] Fill the control-plane documents and first plan for the new repository.
 - [x] Point the local git remote at the intended GitHub repository URL.
@@ -66,14 +66,14 @@ dependencies so `tidplotR` owns only plot building and SVG export.
 
 ## 7) Rollback & recovery
 
-- **Rollback:** archive or remove `/workspaces/tidplotR` if the boundary decision is revisited.
+- **Rollback:** archive or remove `/home/esro/analytid-platform/tidplotR` if the boundary decision is revisited.
 - **Recovery / rerun safety:** the scaffold is local-file based and safe to recreate.
 
 ## 8) Progress log
 
-- 2026-04-17 — Cloned the cognitive-template repo into `/workspaces/tidplotR`,
+- 2026-04-17 — Cloned the cognitive-template repo into `/home/esro/analytid-platform/tidplotR`,
   copied the existing `tidflowR` scaffold shape, created a standalone plotting
-  package surface, slimmed the devcontainer and package dependency list, and
+  package surface, slimmed the package dependency list, and
   filled the control-plane documents for the new boundary. Verification and
   downstream migration remain for the next step.
 - 2026-04-17 — Generated docs, passed `make test`, passed `make smoke`, and
