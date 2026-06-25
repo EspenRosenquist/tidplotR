@@ -5,6 +5,12 @@ deterministic SVG export. It is intentionally separate from `tidflowR`:
 `tidplotR` renders plot-ready inputs, while `tidflowR` handles data flow,
 database access, specs, and JSON artifact assembly.
 
+The package is standalone. It uses the same low-token steering ritual as the
+report-platform workspace, but only for local package memory: `STATE.md`,
+`TODO.md`, `DECISIONS.md`, and `plans/` are the handoff surface. Runtime
+deployment, connectors, specs, and model JSON assembly stay outside this
+repository.
+
 The current package surface is centered on:
 
 - reusable ggplot builders for value distributions, risk comparisons, context
@@ -12,11 +18,26 @@ The current package surface is centered on:
 - deterministic fixed-dimension SVG writing through `svglite`
 - standalone use on ordinary data frames
 - tandem use with `tidflowR` and related report packages
+- strictly shaped SVG products for model-engine callers that need stable
+  dimensions and predictable file output
+
+## Steering For Agents
+
+Before substantive work, read `PROJECT_OVERVIEW.md`, `STATE.md`, `TODO.md`,
+`DECISIONS.md`, and `CONTEXT.md`. Use an Exec Plan under `plans/` for public
+plot contract changes, SVG behavior changes, dependency posture changes, risky
+migrations, or work expected to take more than 2 to 4 hours.
 
 ## Install
 
-The target GitHub repository is intended to be
-`EspenRosenquist/tidplotR`, but local development is the current supported path:
+Install the current package directly from the GitHub repo:
+
+```r
+install.packages("pak")
+pak::pkg_install("EspenRosenquist/tidplotR")
+```
+
+For local development from this checkout:
 
 ```r
 install.packages("pak")

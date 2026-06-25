@@ -1,4 +1,29 @@
-# Decisions — tidplotR
+# Decisions - tidplotR
+
+Add new decisions at the top.
+
+## Entries
+
+- 2026-06-25 - Adopt low-token package-control steering.
+  - Status: accepted
+  - Why: `tidflowR` and `tidplotR` need the same restartable working structure
+    as `report-platform-workspace` without becoming workspace repositories.
+  - Decision: Use `PROJECT_OVERVIEW.md`, `STATE.md`, `TODO.md`,
+    `DECISIONS.md`, `CONTEXT.md`, and `plans/` as the durable memory surface.
+    Keep `AGENTS.md` and `AI_INSTRUCTIONS.md` as agent routing files.
+  - Consequence: Agents must update state, TODOs, decisions, or plans when the
+    durable package state changes instead of relying on chat history.
+
+- 2026-06-25 - Keep deterministic plot/SVG ownership in `tidplotR`.
+  - Status: accepted
+  - Why: model-engine packages need strictly shaped visual products, but
+    connector, flow, spec, and JSON assembly responsibilities have different
+    owners.
+  - Decision: `tidplotR` owns generic plot builders and deterministic
+    fixed-dimension SVG export only. `tidflowR` owns data flow and connectors;
+    downstream packages own report-specific layout and final product assembly.
+  - Consequence: Public plot/SVG contract changes need explicit verification
+    and, when risky, an Exec Plan.
 
 - 2026-04-20 — Keep host-safe default fonts and provide an explicit installer for branded font assets.
   - Status: accepted
