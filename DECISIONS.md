@@ -4,6 +4,12 @@ Add new decisions at the top.
 
 ## Entries
 
+- 2026-09-28 - Add STAMI Bitbucket validation while retaining a pure R library.
+  - The user requested common hosted-runner and Harbor delivery conventions.
+  - Use existing generic plot/SVG tests; optional branded acceptance is separate.
+    No PostgreSQL client, deployed service or API is introduced.
+  - Source and remote activation limits: [delivery alignment](docs/delivery-alignment.md).
+
 - 2026-06-25 - Adopt low-token package-control steering.
   - Status: accepted
   - Why: `tidflowR` and `tidplotR` need the same restartable working structure

@@ -7,3 +7,6 @@
 ^\.DS_Store$
 ^LICENSE$
 ^tmp$
+^bitbucket-pipelines\.yml$
+^scripts/ci-install-dependencies\.R$
+^docs/delivery-alignment\.md$

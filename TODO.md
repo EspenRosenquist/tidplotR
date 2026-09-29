@@ -23,6 +23,9 @@ Review cadence: session-by-session while extraction is active
 
 ## Current First-Pass Work Orders
 
+- [x] Prepare STAMI hosted-runner/cache validation source using `make test smoke`.
+- [ ] Confirm Bitbucket activation/remote CI and separately repair the existing
+  optional NOArtisan bridge; see `docs/delivery-alignment.md`.
 - [x] Add low-token steering state through `STATE.md` and `AGENTS.md`.
 - [x] Align `plans/README.md` with the package-control ritual.
 - [ ] Audit public plot and SVG behavior against strict model-engine product

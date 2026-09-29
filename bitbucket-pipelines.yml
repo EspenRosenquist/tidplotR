@@ -1,0 +1,18 @@
+image: harbor.apps.stami.no/dockerhub/rocker/r-ver:4.5.2
+
+options:
+  runs-on:
+    - stami.hosted
+
+pipelines:
+  default:
+    - step:
+        name: Test standalone plot and SVG package
+        size: 2x
+        runs-on:
+          - stami.hosted
+          - ram16g
+        script:
+          - apt-get update && apt-get install -y --no-install-recommends make libfontconfig1-dev libfreetype6-dev libharfbuzz-dev libfribidi-dev libpng-dev libtiff5-dev libjpeg-dev && rm -rf /var/lib/apt/lists/*
+          - Rscript --vanilla scripts/ci-install-dependencies.R
+          - make test smoke

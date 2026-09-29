@@ -1,9 +1,14 @@
 # State - tidplotR
 
-Last updated: 2026-06-25
+Last updated: 2026-09-28 for CI source alignment; product scope is unchanged.
 
 ## Current checkpoint
 
+- [STAMI delivery alignment](docs/delivery-alignment.md) adds validation-only
+  Bitbucket source on `stami.hosted` using a cached R image and bounded 2x/`ram16g`
+  allocation. Actual Bitbucket activation is pending for the GitHub-hosted
+  package. Local baseline exposes a pre-existing optional NOArtisan bridge
+  failure (`proportion_labeler()` absent); generic CI does not certify branding.
 - `tidplotR` is a standalone pure R package, not a report-platform workspace
   repository and not a `tidflowR` submodule.
 - The package owns generic plotting, plot-local validation, and deterministic
